@@ -1,5 +1,6 @@
 import re
 from fractions import Fraction
+
 def get_input():
     allocate_pattern = '(^ALLOT_WATER (2|3) (\d+:\d+))'
     test_string = input()
@@ -26,6 +27,7 @@ def get_input():
                 return values;
             else:
                 print('ADD_GUESTS or BILL commands only')
+
 def get_required_water(input):
     people = 3 if input['flat_type'] == '2' else 5
     guests = input['guests']
@@ -33,6 +35,7 @@ def get_required_water(input):
         'allotted_amount': people*10*30,
         'required_amount':(people+guests)*10*30
     }
+
 def calculate_bill(amount, ratio):
     normal_bill = get_normal_bill(amount['allotted_amount'], ratio)
     tanker_bill = get_tanker_bill(amount['required_amount']-amount['allotted_amount'])
@@ -63,26 +66,13 @@ def get_tanker_bill(liters):
     if liters:
         total += liters*8
     return total
+
 def main():
     input_values = get_input()
     amount = get_required_water(input_values)
     print(input_values, amount["required_amount"], amount["allotted_amount"])
     bill = calculate_bill(amount, input_values['ratio'])
     print(amount["required_amount"], bill)
-     
-main()
-# get inputs from user
-# content = []
-# while True:
-#     # get allot input, it must be the first one 
-#     allotedValue = input();
-#     print(allotedValue)
-#     break;
-# # while True:
-# #     try:
-# #         val = input()
-# #         print(val)
-# #     except EOFError:
-# #         break
-# #     content.append(val)
-# # print(content)
+
+if __name__=="__main__":
+    main()
